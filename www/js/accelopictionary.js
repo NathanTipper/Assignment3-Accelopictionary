@@ -44,7 +44,7 @@ let backgroundColor = {r: 255, g: 255, b: 255, a: 1};
 let input, submitButton, guessLabel, feedbackLabel;
 
 // Words
-let pictionaryWords = ["Shrek"],
+let pictionaryWords = ["Apple", "Teapot", "Dog", "Turtle", "Table", "Potato", "Pencil", "Sword", "Shield", "Bow", "Canada"],
     indexOfWord = 0;
 
 // Fiesta colors
@@ -63,6 +63,7 @@ function handleOrientation(event) {
 function init() {
   buildActions();
   buildWidgets();
+  indexOfWord = getRandomIndex();
 }
 
 function buildActions() {
@@ -193,7 +194,7 @@ function isButtonPressed(button) {
 function drawCurrentWord(x, y) {
   fill(0)
   textSize(32);
-  text('Your word is: Shrek', x, y)
+  text(`Your word is: ${pictionaryWords[indexOfWord]}`, x, y);
 }
 
 function drawCurrentAction(x, y) {
@@ -318,6 +319,8 @@ function reset() {
   drawingTime = 30000;
   drawing = false;
   points = [];
+  startingX = -1;
+  startingY = -1;
   indexOfWord = getRandomIndex();
 }
 
