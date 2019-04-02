@@ -1,12 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Pictionary</name>
+<widget id="com.ntipper.accelopictionary" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Accelopictionary</name>
     <description>
-        A blank PhoneGap app.
+        A pictionary game which uses the phones accelerometer to draw the pictures.
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
+    <author email="n.tipper@uleth.ca" href="https://www.w1llbedone.com">
         PhoneGap Team
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <icon src="www/res/icon/icon.png" />
 </widget>
