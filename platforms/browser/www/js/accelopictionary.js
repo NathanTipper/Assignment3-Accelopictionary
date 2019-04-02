@@ -18,19 +18,9 @@ var canvas,
     startingX = -1,
     startingY = -1;
 
-// Buttons
-let startButton = { x: 0, y: 0, width: 200, height: 75, color: { r: 175, g: 26, b: 26, a: 1 }, textSize: 24, text: "Start", drawBox: true},
-    startButtonClickedColor = {r: 26, g: 175, b: 88, a: 1 },
-    startButtonYOffset = 100;
-
-let tryGuessButton = { x: 0, y: 0, width: 200, height: 75, color: { r: 175, g: 26, b: 26, a: 1}, textSize: 24, text: "Guess", drawBox: true },
-    tryGuessButtonYOffset = 100;
-
-let resetButton = { x: 0, y: 0, width: 50, height: 25, color: { r: 25, g: 25, b: 135, a: 1 }, textSize: 24, text: "Reset", drawBox: false },
-    resetButtonYOffest = 50;
 
 // Timing
-let drawingTime = 5000, // in milliseconds
+let drawingTime = 30000, // in milliseconds
     drawing = false,
     timerInterval;
 
@@ -44,7 +34,7 @@ let backgroundColor = {r: 255, g: 255, b: 255, a: 1};
 let input, submitButton, guessLabel, feedbackLabel;
 
 // Words
-let pictionaryWords = ["Shrek"],
+let pictionaryWords = ["Apple", "Teapot", "Dog", "Turtle", "Table", "Potato", "Pencil", "Sword", "Shield", "Bow", "Canada"],
     indexOfWord = 0;
 
 // Fiesta colors
@@ -53,6 +43,31 @@ let fiestaBackgroundColor = {r: 0, g: 0, b: 100, a: 1},
     gMod = 2,
     bMod = 3;
 let fiestaText = { x: 0, y: 0, text: "Correct!", textSize: 32, color: {r: 0, g: 0, b: 0, a: 1} };
+
+// Buttons
+let startButton = { x: 0, y: 0, width: 200, r: 0, height: 75, color: { r: 175, g: 26, b: 26, a: 1 }, textSize: 24, text: "Start", drawBox: true},
+    startButtonClickedColor = {r: 26, g: 175, b: 88, a: 1 },
+    startButtonYOffset = 100;
+
+let tryGuessButton = { x: 0, y: 0, width: 200, height: 75, color: { r: 175, g: 26, b: 26, a: 1}, textSize: 24, text: "Guess", drawBox: true },
+    tryGuessButtonYOffset = 100;
+
+let resetButton = { x: 0, y: 0, width: 50, height: 25, color: { r: 25, g: 25, b: 135, a: 1 }, textSize: 24, text: "Reset", drawBox: false },
+    resetButtonYOffset = 50;
+
+// Palette buttons
+let paletteButtonsYOffset = 50,
+    paletteButtonsXOffset = 10,
+    paletteButtonWidth = 25,
+    paletteButtonHeight = 25,
+    paletteButtonRadius = 10,
+    paletteButtons = [];
+
+
+let setToEraseButton = { x: 0, y: 0, width: paletteButtonWidth, height: paletteButtonHeight, r: paletteButtonRadius, color: { r: backgroundColor.r, g: backgroundColor.g, b: backgroundColor.b }, textSize: 0, text: "" },
+    setToGreenButton = { x: 0, y: 0, width: paletteButtonWidth, height: paletteButtonHeight, r: paletteButtonRadius, color: { r: 0, g: 255, b: 0 }, textSize: 0, text: "" },
+    setToRedButton = { x: 0, y: 0, width: paletteButtonWidth, height: paletteButtonHeight, r: paletteButtonRadius, color: { r: 255, g: 0, b: 0 }, textSize: 0, text: "" },
+    setToBlueButton = { x: 0, y: 0, width: paletteButtonWidth, height: paletteButtonHeight, r: paletteButtonRadius, color: { r: 0 g: 0, b: 255 }, textSize: 0, text: "" };
 
 function handleOrientation(event) {
   alpha = event.alpha;
@@ -63,6 +78,7 @@ function handleOrientation(event) {
 function init() {
   buildActions();
   buildWidgets();
+  indexOfWord = getRandomIndex();
 }
 
 function buildActions() {
@@ -79,7 +95,14 @@ function buildWidgets() {
   fiestaText.y = height / 2;
 
   resetButton.x = width / 2;
-  resetButton.y = height - resetButtonYOffest;
+  resetButton.y = height - resetButtonYOffset;
+}
+
+function buildPaletteButtons() {
+  paletteButtons.push(setToEraseButton);
+  paletteButtons.push(setToRedButton);
+  paletteButtons.push(setToGreenButton);
+  paletteButtons.push(setToBlueButton);
 }
 
 function setup() {
@@ -136,6 +159,9 @@ function drawPicture() {
   controlCircle();
   drawPoints();
   drawTimer(width/2, 120);
+  for(let i = 0; i < paletteButtons.length; ++i) {
+    drawButton(paletteButtons[i]);
+  }
 }
 
 function drawFinished() {
@@ -193,7 +219,7 @@ function isButtonPressed(button) {
 function drawCurrentWord(x, y) {
   fill(0)
   textSize(32);
-  text('Your word is: Shrek', x, y)
+  text(`Your word is: ${pictionaryWords[indexOfWord]}`, x, y);
 }
 
 function drawCurrentAction(x, y) {
@@ -211,7 +237,7 @@ function drawStartingPoint() {
 function drawButton(button) {
   if(button.drawBox) {
     fill(`rgba(${button.color.r}, ${button.color.g}, ${button.color.b}, ${button.color.a})`);
-    rect(button.x - button.width / 2, button.y - button.height / 2 + 10, button.width, button.height);
+    rect(button.x - button.width / 2, button.y - button.height / 2 + 10, button.width, button.height, button.r);
   }
   fill(0);
   textSize(button.textSize);
@@ -318,6 +344,8 @@ function reset() {
   drawingTime = 30000;
   drawing = false;
   points = [];
+  startingX = -1;
+  startingY = -1;
   indexOfWord = getRandomIndex();
 }
 
