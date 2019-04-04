@@ -64,10 +64,10 @@ let paletteButtonsYOffset = 50,
     paletteButtons = [];
 
 
-let setToEraseButton = { x: 0, y: 0, width: paletteButtonWidth, height: paletteButtonHeight, r: paletteButtonRadius, color: { r: backgroundColor.r, g: backgroundColor.g, b: backgroundColor.b }, textSize: 0, text: "" },
-    setToGreenButton = { x: 0, y: 0, width: paletteButtonWidth, height: paletteButtonHeight, r: paletteButtonRadius, color: { r: 0, g: 255, b: 0 }, textSize: 0, text: "" },
-    setToRedButton = { x: 0, y: 0, width: paletteButtonWidth, height: paletteButtonHeight, r: paletteButtonRadius, color: { r: 255, g: 0, b: 0 }, textSize: 0, text: "" },
-    setToBlueButton = { x: 0, y: 0, width: paletteButtonWidth, height: paletteButtonHeight, r: paletteButtonRadius, color: { r: 0 g: 0, b: 255 }, textSize: 0, text: "" };
+// let setToEraseButton = { x: 0, y: 0, width: paletteButtonWidth, height: paletteButtonHeight, r: paletteButtonRadius, color: { r: backgroundColor.r, g: backgroundColor.g, b: backgroundColor.b }, textSize: 0, text: "" },
+//     setToGreenButton = { x: 0, y: 0, width: paletteButtonWidth, height: paletteButtonHeight, r: paletteButtonRadius, color: { r: 0, g: 255, b: 0 }, textSize: 0, text: "" },
+//     setToRedButton = { x: 0, y: 0, width: paletteButtonWidth, height: paletteButtonHeight, r: paletteButtonRadius, color: { r: 255, g: 0, b: 0 }, textSize: 0, text: "" },
+//     setToBlueButton = { x: 0, y: 0, width: paletteButtonWidth, height: paletteButtonHeight, r: paletteButtonRadius, color: { r: 0 g: 0, b: 255 }, textSize: 0, text: "" };
 
 function handleOrientation(event) {
   alpha = event.alpha;
@@ -98,12 +98,12 @@ function buildWidgets() {
   resetButton.y = height - resetButtonYOffset;
 }
 
-function buildPaletteButtons() {
-  paletteButtons.push(setToEraseButton);
-  paletteButtons.push(setToRedButton);
-  paletteButtons.push(setToGreenButton);
-  paletteButtons.push(setToBlueButton);
-}
+// function buildPaletteButtons() {
+//   paletteButtons.push(setToEraseButton);
+//   paletteButtons.push(setToRedButton);
+//   paletteButtons.push(setToGreenButton);
+//   paletteButtons.push(setToBlueButton);
+// }
 
 function setup() {
   canvas = createCanvas(window.innerWidth, window.innerHeight);
@@ -159,9 +159,9 @@ function drawPicture() {
   controlCircle();
   drawPoints();
   drawTimer(width/2, 120);
-  for(let i = 0; i < paletteButtons.length; ++i) {
-    drawButton(paletteButtons[i]);
-  }
+  // for(let i = 0; i < paletteButtons.length; ++i) {
+  //   drawButton(paletteButtons[i]);
+  // }
 }
 
 function drawFinished() {
